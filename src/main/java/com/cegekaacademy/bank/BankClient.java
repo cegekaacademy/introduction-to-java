@@ -22,20 +22,24 @@ public class BankClient implements BankCalculator {
     }
 
     public double calculateSeniorityBonus() {
-        if (this.person == null || this.bankAccounts == null || this.bankAccounts.size() == 0) {
-            return -1;
+        if (person == null || this.bankAccounts == null || this.bankAccounts.isEmpty()) {
+            throw new IllegalStateException("Client not found");
         }
 
-        int age = person.calculateAge();
-        double balance = 0;
-        if (age > 50) {
-            for (BankAccount bankAccount : this.bankAccounts) {
-                balance += (bankAccount instanceof DepositAccount ? 0.05 : 0.01)
-                        * bankAccount.getBalance();
+        if (person.calculateAge() < 50) {
+            return 0;
+        }
+
+        int bonus = 0;
+        for (BankAccount bankAccount : bankAccounts) {
+            if (bankAccount instanceof DepositAccount) {
+                bonus += 0.05 * bankAccount.getBalance();
+            } else {
+                bonus += 0.02 * bankAccount.getBalance();
             }
         }
 
-        return balance;
+        return bonus;
     }
 
 }

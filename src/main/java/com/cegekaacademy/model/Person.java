@@ -1,6 +1,7 @@
 package com.cegekaacademy.model;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Person {
 
@@ -9,6 +10,9 @@ public class Person {
     private Address address;
 
     public Person(String name, String pid, Address address) {
+        if (pid == null || pid.length() != 13) {
+            throw new IllegalStateException("Pid should have exactly 13 characters");
+        }
         this.name = name;
         this.pid = pid;
         this.address = address;
@@ -39,13 +43,14 @@ public class Person {
     }
 
     public int calculateAge() {
-        int sexId = Integer.valueOf(this.pid.substring(0, 1));
-        String yearOfBirthDigits = this.pid.substring(1, 3);
-        int currentYear = LocalDate.now().getYear();
+        int sexId = Integer.valueOf(this.pid.substring(0, 1));          // 2
+        String yearOfBirthDigits = this.pid.substring(1, 3);            // 92
+        int monthOfBirth = Integer.valueOf(this.pid.substring(3, 5));   // 01
+        int dayOfBirth = Integer.valueOf(this.pid.substring(5, 7));     // 14
 
-        if (sexId == 0 || sexId == 1) {
+        if (sexId == 1 || sexId == 2) {
             int yearOfBirth = Integer.valueOf("19" + yearOfBirthDigits);
-            return currentYear - yearOfBirth;
+            return (int) ChronoUnit.YEARS.between(LocalDate.of(yearOfBirth, monthOfBirth, dayOfBirth), LocalDate.now());
         }
 
         // TODO implement all the other cases
