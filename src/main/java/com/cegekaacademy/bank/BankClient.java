@@ -16,11 +16,13 @@ public class BankClient implements BankCalculator {
         this.bankAccounts = bankAccounts;
     }
 
+    @Override
     public double getTotalBalance() {
-        // TODO
+        // TODO implement me
         return 0;
     }
 
+    @Override
     public double calculateSeniorityBonus() {
         if (person == null || this.bankAccounts == null || this.bankAccounts.isEmpty()) {
             throw new IllegalStateException("Client not found");
