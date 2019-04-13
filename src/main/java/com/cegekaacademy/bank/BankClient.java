@@ -1,5 +1,6 @@
 package com.cegekaacademy.bank;
 
+import com.cegekaacademy.exceptions.BalanceException;
 import com.cegekaacademy.model.BankAccount;
 import com.cegekaacademy.model.DepositAccount;
 import com.cegekaacademy.model.Person;
@@ -17,9 +18,18 @@ public class BankClient implements BankCalculator {
     }
 
     @Override
-    public double getTotalBalance() {
-        // TODO implement me
-        return 0;
+    public double getTotalBalance() throws BalanceException {
+
+        if(bankAccounts == null || bankAccounts.size() == 0){
+            throw new BalanceException();
+        }
+
+        double totalBalance = 0;
+        for(BankAccount bankAccount: bankAccounts){
+            totalBalance+=bankAccount.getBalance();
+        }
+
+        return totalBalance;
     }
 
     @Override
