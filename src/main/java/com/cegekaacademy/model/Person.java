@@ -1,5 +1,7 @@
 package com.cegekaacademy.model;
 
+import java.util.Calendar;
+
 public class Person {
 
     private String name;
@@ -40,8 +42,27 @@ public class Person {
     }
 
     public int calculateAge() {
-        // TODO implement me
-
-        return 0;
+        int firstDigit = Character.getNumericValue(this.pid.charAt(0));
+        int cnpYear = Character.getNumericValue(this.pid.charAt(1)) * 10 + Character.getNumericValue(this.pid.charAt(2));
+        int birthYear;
+        switch (firstDigit) {
+            case 1:
+            case 2:
+                birthYear = 1900;
+                break;
+            case 3:
+            case 4:
+                birthYear = 1800;
+                break;
+            case 5:
+            case 6:
+                birthYear = 2000;
+                break;
+            default:
+                throw new IllegalStateException("Pid should start with a digit between 1-6");
+        }
+        birthYear += cnpYear;
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        return currentYear - birthYear;
     }
 }
