@@ -53,7 +53,6 @@ public abstract class BankAccount {
             return true;
 
         else{
-
             this.setBalance(sursaBalanta);
             destination.setBalance(destinatieBalanta);
             return false;
