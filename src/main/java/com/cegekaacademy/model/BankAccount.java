@@ -45,7 +45,10 @@ public abstract class BankAccount {
     }
 
     public boolean transfer(BankAccount destination, double amount) {
-        // TODO implement me
+
+        if(this.withdraw(amount) && destination.deposit(amount)){
+            return true;
+        }
 
         return false;
     }
