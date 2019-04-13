@@ -40,4 +40,6 @@ public class BankClientTest {
         Mockito.verify(person, Mockito.times(1)).calculateAge();
         //Mockito.verify(currentAccount, Mockito.times(1)).getBalance();
     }
+
+    //mesaj aici
 }
