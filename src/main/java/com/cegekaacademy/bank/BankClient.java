@@ -18,9 +18,15 @@ public class BankClient implements BankCalculator {
 
     @Override
     public double getTotalBalance() {
-        // TODO implement me
-        //comment
-        return 0;
+
+        if(bankAccounts == null || bankAccounts.size() == 0){
+            return 0;
+        }
+        double totalBalance = 0;
+        for (BankAccount bankAccount:bankAccounts) {
+            totalBalance += bankAccount.getBalance();
+        }
+        return totalBalance;
     }
 
     @Override
