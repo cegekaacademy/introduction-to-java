@@ -19,6 +19,7 @@ public class BankClient implements BankCalculator {
     @Override
     public double getTotalBalance() {
         // TODO implement me
+        //comment
         return 0;
     }
 
