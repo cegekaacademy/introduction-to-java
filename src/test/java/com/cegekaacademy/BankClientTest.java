@@ -41,5 +41,5 @@ public class BankClientTest {
         //Mockito.verify(currentAccount, Mockito.times(1)).getBalance();
     }
 
-    //mesaj aici
+
 }
