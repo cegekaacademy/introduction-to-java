@@ -1,5 +1,8 @@
 package com.cegekaacademy.model;
 
+import com.cegekaacademy.exception.BankAccountsNullException;
+import com.cegekaacademy.exception.BankAcountNullException;
+
 public abstract class BankAccount {
 
     private String iban;
@@ -44,10 +47,12 @@ public abstract class BankAccount {
         return true;
     }
 
-    public boolean transfer(BankAccount destination, double amount){
+    public boolean transfer(BankAccount destination, double amount) throws BankAcountNullException {
+        if(destination==null)
+            throw new BankAcountNullException();
 
         double sursaBalanta=this.balance;
-        double destinatieBalanta=destination.balance;
+        double destinatieBalanta=destination.getBalance();
 
         if (destination.deposit(amount) && this.withdraw(amount))
             return true;
