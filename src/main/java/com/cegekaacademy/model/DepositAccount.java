@@ -43,14 +43,16 @@ public class DepositAccount extends BankAccount {
     }
 
     public double getInterest(){
-        if(getBalance()<0 && interestPercent <0)
+        if(getBalance()<0 || interestPercent <0)
             return 0;
 
      return (this.getBalance()*interestPercent*durationInMonth/12);
     }
     public double getInterestAfterTaxDeduction(){
-        double interest=getInterest();
-        return interest-0.01*interest;
+        if(getInterest()<0)
+            return 0;
+
+        return  getInterest()-0.01*getInterest();
     }
 
     public void addInterest(){
