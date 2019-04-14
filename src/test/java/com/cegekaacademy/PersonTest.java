@@ -35,7 +35,7 @@ public class PersonTest {
     @Test(expected = IllegalStateException.class)
     public void GIVEN_personPidInvalid_WHEN_calculateAge_THEN_returnException(){
         Person person = new Person("Ioana",null,null);
-        int result=person.calculateAge();
+        person.calculateAge();
 
     }
 
