@@ -65,7 +65,6 @@ public class CurrentAccountTest {
 
     @Test
     public void GIVEN_destinationAndAmountValid_WHEN_transfer_THEN_returnTrue() throws TransferException {
-
         CurrentAccount currentAccount = new CurrentAccount("iban",5000);
         CurrentAccount currentAccountDestination = Mockito.mock(CurrentAccount.class);
 

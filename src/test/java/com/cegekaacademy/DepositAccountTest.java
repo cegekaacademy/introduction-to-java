@@ -1,7 +1,6 @@
 package com.cegekaacademy;
 
 import com.cegekaacademy.exception.TransferException;
-import com.cegekaacademy.model.CurrentAccount;
 import com.cegekaacademy.model.DepositAccount;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,9 +12,7 @@ public class DepositAccountTest {
     @Test
     public void GIVEN_amountValid_WHEN_withdraw_THEN_returnTrue(){
         DepositAccount depositAccount = new DepositAccount("iban",2000);
-
         boolean result =  depositAccount.withdraw(200);
-
         Assert.assertEquals(1800,depositAccount.getBalance(),0);
         Assert.assertTrue(result);
     }
@@ -62,7 +59,6 @@ public class DepositAccountTest {
 
     @Test
     public void GIVEN_destinationAndAmountValid_WHEN_transfer_THEN_returnTrue() throws TransferException {
-
         DepositAccount depositAccount = new DepositAccount("iban",5000);
         DepositAccount depositAccountDestination = Mockito.mock(DepositAccount.class);
 
@@ -81,14 +77,11 @@ public class DepositAccountTest {
 
     @Test
     public void GIVEN_destinationValidAndAmountLessThan200_WHEN_transfer_THEN_returnFalse() throws TransferException {
-
         DepositAccount depositAccount = new DepositAccount("iban",5000);
         DepositAccount depositAccountDestination = Mockito.mock(DepositAccount.class);
 
         Mockito.when(depositAccountDestination.deposit(100D)).thenReturn(false);
-
         boolean result = depositAccount.transfer(depositAccountDestination,100);
-
         Mockito.when(depositAccountDestination.getBalance()).thenReturn(0D);
 
         Assert.assertFalse(result);
@@ -101,14 +94,11 @@ public class DepositAccountTest {
 
     @Test
     public void GIVEN_destinationValidAndAmountGraterThanBalance_WHEN_transfer_THEN_returnFalse() throws TransferException {
-
         DepositAccount depositAccount = new DepositAccount("iban",5000);
         DepositAccount depositAccountDestination = Mockito.mock(DepositAccount.class);
 
         Mockito.when(depositAccountDestination.deposit(6000D)).thenReturn(true);
-
         boolean result = depositAccount.transfer(depositAccountDestination,6000);
-
         Mockito.when(depositAccountDestination.getBalance()).thenReturn(0D);
 
         Assert.assertFalse(result);
