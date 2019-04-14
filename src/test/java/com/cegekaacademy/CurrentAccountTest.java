@@ -1,16 +1,10 @@
 package com.cegekaacademy;
 
-import com.cegekaacademy.bank.BankClient;
-import com.cegekaacademy.exception.BankAccountsNullException;
-import com.cegekaacademy.exception.BankAcountNullException;
+import com.cegekaacademy.exception.BankAccountNullException;
 import com.cegekaacademy.model.CurrentAccount;
-import com.cegekaacademy.model.Person;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CurrentAccountTest {
 
@@ -62,7 +56,7 @@ public class CurrentAccountTest {
     }
 
     @Test
-    public void GIVEN_bankAccountDestinationValidAndAmountValid_WHEN_transfer_THEN_returnTrue() throws BankAcountNullException {
+    public void GIVEN_bankAccountDestinationValidAndAmountValid_WHEN_transfer_THEN_returnTrue() throws BankAccountNullException {
         CurrentAccount currentAccount=new CurrentAccount("IBAN",2000);
         CurrentAccount currentAccountDestination = Mockito.mock(CurrentAccount.class);
 
@@ -80,7 +74,7 @@ public class CurrentAccountTest {
 
     }
     @Test
-    public void GIVEN_bankAccountDestinationValidAndAmountGreaterThan3000_WHEN_transfer_THEN_returnFalse() throws BankAcountNullException {
+    public void GIVEN_bankAccountDestinationValidAndAmountGreaterThan3000_WHEN_transfer_THEN_returnFalse() throws BankAccountNullException {
         CurrentAccount currentAccount=new CurrentAccount("IBAN",5000);
         CurrentAccount currentAccountDestination = Mockito.mock(CurrentAccount.class);
 
@@ -98,7 +92,7 @@ public class CurrentAccountTest {
 
     }
     @Test
-    public void GIVEN_bankAccountDestinationValidAndAmountGreaterThanBalance_WHEN_transfer_THEN_returnFalse() throws BankAcountNullException {
+    public void GIVEN_bankAccountDestinationValidAndAmountGreaterThanBalance_WHEN_transfer_THEN_returnFalse() throws BankAccountNullException {
         CurrentAccount currentAccount=new CurrentAccount("IBAN",2000);
         CurrentAccount currentAccountDestination = Mockito.mock(CurrentAccount.class);
 
@@ -115,8 +109,8 @@ public class CurrentAccountTest {
         Mockito.verify(currentAccountDestination, Mockito.times(2)).getBalance();
 
     }
-    @Test(expected = BankAcountNullException.class)
-    public void GIVEN_bankAccountDestinationNull_WHEN_calculateTotalBalance_THEN_returnException() throws BankAcountNullException {
+    @Test(expected = BankAccountNullException.class)
+    public void GIVEN_bankAccountDestinationNull_WHEN_calculateTotalBalance_THEN_returnException() throws BankAccountNullException {
         CurrentAccount currentAccount=new CurrentAccount("IBAN",2000);
         currentAccount.transfer(null,100);
     }

@@ -1,7 +1,6 @@
 package com.cegekaacademy.model;
 
-import com.cegekaacademy.exception.BankAccountsNullException;
-import com.cegekaacademy.exception.BankAcountNullException;
+import com.cegekaacademy.exception.BankAccountNullException;
 
 public abstract class BankAccount {
 
@@ -47,9 +46,9 @@ public abstract class BankAccount {
         return true;
     }
 
-    public boolean transfer(BankAccount destination, double amount) throws BankAcountNullException {
+    public boolean transfer(BankAccount destination, double amount) throws BankAccountNullException {
         if(destination==null)
-            throw new BankAcountNullException();
+            throw new BankAccountNullException();
 
         double sursaBalanta=this.balance;
         double destinatieBalanta=destination.getBalance();
