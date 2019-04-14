@@ -2,6 +2,7 @@ package com.cegekaacademy;
 
 
 import com.cegekaacademy.bank.BankClient;
+import com.cegekaacademy.exception.GetTotalBalanceException;
 import com.cegekaacademy.model.BankAccount;
 import com.cegekaacademy.model.CurrentAccount;
 import com.cegekaacademy.model.Person;
@@ -40,4 +41,49 @@ public class BankClientTest {
         Mockito.verify(person, Mockito.times(1)).calculateAge();
         //Mockito.verify(currentAccount, Mockito.times(1)).getBalance();
     }
+
+    @Test
+    public void GIVEN_accountsAndPersonValid_WHEN_getTotalBalance_THEN_returnTotalBalance() throws GetTotalBalanceException {
+
+        CurrentAccount currentAccount = Mockito.mock(CurrentAccount.class);
+        Mockito.when(currentAccount.getBalance()).thenReturn(200D);
+
+        List<BankAccount> bankAccounts = new ArrayList<>();
+        bankAccounts.add(currentAccount);
+
+        Person person = Mockito.mock(Person.class);
+
+        BankClient bankClient = new BankClient(person,bankAccounts);
+
+        double result = bankClient.getTotalBalance();
+
+        Assert.assertEquals(200,result,0);
+
+        Mockito.verify(currentAccount, Mockito.times(1)).getBalance();
+    }
+
+    @Test
+    public void GIVEN_noAccountsAndPersonValid_WHEN_getTotalBalance_THEN_returnZero() throws GetTotalBalanceException {
+
+        Person person = Mockito.mock(Person.class);
+
+        BankClient bankClient = new BankClient(person, new ArrayList<>());
+
+        double result = bankClient.getTotalBalance();
+
+        Assert.assertEquals(0,result,0);
+
+    }
+
+    @Test(expected = GetTotalBalanceException.class)
+
+    public void GIVEN_noAccountsAndNoPerson_WHEN_getTotalBalance_THEN_returnThrowException() throws GetTotalBalanceException {
+
+        BankClient bankClient = new BankClient(null, new ArrayList<>());
+
+        bankClient.getTotalBalance();
+
+    }
+
+
 }
