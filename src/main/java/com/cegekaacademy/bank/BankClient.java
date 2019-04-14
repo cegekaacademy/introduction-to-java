@@ -20,7 +20,7 @@ public class BankClient implements BankCalculator {
     @Override
     public double getTotalBalance() throws BalanceException {
 
-        if(bankAccounts == null || bankAccounts.size() == 0){
+        if(person == null|| this.bankAccounts == null || bankAccounts.size() == 0){
             throw new BalanceException();
         }
 
