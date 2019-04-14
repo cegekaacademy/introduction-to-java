@@ -31,6 +31,9 @@ public class Person {
     }
 
     public void setPid(String pid) {
+        if (pid == null || pid.length() != 13) {
+            throw new IllegalStateException("Pid should have exactly 13 characters");
+        }
         this.pid = pid;
     }
 
