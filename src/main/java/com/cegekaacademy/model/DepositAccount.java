@@ -54,7 +54,6 @@ public class DepositAccount extends BankAccount {
     }
 
     public void addInterest(){
-
         this.setBalance(this.getBalance()+getInterestAfterTaxDeduction());
     }
 }

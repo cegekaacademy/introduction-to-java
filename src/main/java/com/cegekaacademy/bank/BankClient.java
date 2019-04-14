@@ -20,8 +20,12 @@ public class BankClient implements BankCalculator {
     @Override
     public double getTotalBalance() {
         double total=0;
+
        if(bankAccounts==null || bankAccounts.size()==0)
            throw new BankAccountsNullException("Fara elem in lista");
+       if(person==null)
+           throw new BankAccountsNullException("Persoana este nula");
+
         for(BankAccount bankAccount:bankAccounts){
             total+=bankAccount.getBalance();
         }
