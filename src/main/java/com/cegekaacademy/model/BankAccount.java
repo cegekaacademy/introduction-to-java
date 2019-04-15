@@ -45,8 +45,16 @@ public abstract class BankAccount {
     }
 
     public boolean transfer(BankAccount destination, double amount) {
-        // TODO implement me
+        if(destination == null) {
+            return false;
+        }
 
-        return false;
+        if(amount <= 0 || amount > this.balance) {
+            return false;
+        }
+
+        this.balance -= amount;
+        destination.balance += amount;
+        return true;
     }
 }
