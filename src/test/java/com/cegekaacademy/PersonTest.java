@@ -20,6 +20,11 @@ public class PersonTest {
         Person person = new Person("elena", "297041809001", null);
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void GIVEN_pidNull_WHEN_setPid_THEN_throwException(){
+        Person person = new Person("elena", null, null);
+    }
+
     @Test
     public void GIVEN_pidValid_WHEN_calculateAge_THEN_returnAge(){
         Person person = new Person("elena", "2970410090012", null);
