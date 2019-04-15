@@ -1,7 +1,6 @@
 package com.cegekaacademy.model;
 
 public class Address {
-
     private String city;
     private String street;
     private int number;

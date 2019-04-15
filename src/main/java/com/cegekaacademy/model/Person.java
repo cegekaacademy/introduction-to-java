@@ -1,7 +1,9 @@
 package com.cegekaacademy.model;
 
-public class Person {
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
+public class Person {
     private String name;
     private String pid;
     private Address address;
@@ -28,6 +30,9 @@ public class Person {
     }
 
     public void setPid(String pid) {
+        if (pid == null || pid.length() != 13) {
+            throw new IllegalStateException("Pid should have exactly 13 characters");
+        }
         this.pid = pid;
     }
 
@@ -40,8 +45,23 @@ public class Person {
     }
 
     public int calculateAge() {
-        // TODO implement me
+        int year = 0;
+        char firstNumber = pid.charAt(0);
+        if (firstNumber == '1' || firstNumber == '2') {
+            year = 1900 + Integer.parseInt(pid.substring(1, 3));
+        } else if (firstNumber == '3' || firstNumber == '4') {
+            year = 1800 + Integer.parseInt(pid.substring(1, 3));
+        } else if (firstNumber == '5' || firstNumber == '6') {
+            year = 2000 + Integer.parseInt(pid.substring(1, 3));
+        }
+        int month = Integer.parseInt(pid.substring(3, 5));
+        int day = Integer.parseInt(pid.substring(5, 7));
+        Calendar birthDate = Calendar.getInstance();
+        birthDate.set(year, month, day);
+        Calendar currentDate = Calendar.getInstance();
+        long daysPassed = TimeUnit.MILLISECONDS.toDays(Math.abs(currentDate.getTimeInMillis() - birthDate.getTimeInMillis()));
 
-        return 0;
+        return (int) daysPassed / 365;
+
     }
 }

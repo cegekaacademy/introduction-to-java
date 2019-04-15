@@ -18,8 +18,16 @@ public class BankClient implements BankCalculator {
 
     @Override
     public double getTotalBalance() {
-        // TODO implement me
-        return 0;
+        double result = 0;
+        if (bankAccounts == null) {
+            throw new IllegalStateException("Bank accounts do not exist!");
+        }
+        for (BankAccount bankAccount : bankAccounts) {
+            if (bankAccount != null) {
+                result += bankAccount.getBalance();
+            }
+        }
+        return result;
     }
 
     @Override

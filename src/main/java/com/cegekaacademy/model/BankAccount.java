@@ -1,7 +1,6 @@
 package com.cegekaacademy.model;
 
 public abstract class BankAccount {
-
     private String iban;
     private double balance;
 
@@ -45,8 +44,10 @@ public abstract class BankAccount {
     }
 
     public boolean transfer(BankAccount destination, double amount) {
-        // TODO implement me
-
-        return false;
+        //TODO
+        if (destination == null || amount <= 0) {
+            return false;
+        }
+        return this.withdraw(amount) & destination.deposit(amount);
     }
 }

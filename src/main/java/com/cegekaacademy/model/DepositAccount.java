@@ -1,10 +1,9 @@
 package com.cegekaacademy.model;
 
 public class DepositAccount extends BankAccount {
+    private double interest;
 
-    //TODO add interest
-
-    public DepositAccount(String iban, double balance) {
+    public DepositAccount(String iban, double balance, double interest) {
         super(iban, balance);
     }
 
