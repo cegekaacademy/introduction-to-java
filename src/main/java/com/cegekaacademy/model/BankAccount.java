@@ -45,8 +45,17 @@ public abstract class BankAccount {
     }
 
     public boolean transfer(BankAccount destination, double amount) {
-        // TODO implement me
-
-        return false;
+        if (destination == null)
+            throw new IllegalStateException("Invalid destination");
+        if (this.balance >= amount) {
+            if (destination instanceof DepositAccount) {
+                if (amount <= 200)
+                    destination.setBalance(destination.getBalance() + amount);
+                else
+                    throw new IllegalStateException("The sum is over the limit of this bank account type!");
+            } else destination.setBalance(destination.getBalance() + amount);
+        } else
+            throw new IllegalStateException("Not enough money!");
+        return true;
     }
 }
