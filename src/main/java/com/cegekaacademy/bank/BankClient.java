@@ -12,13 +12,24 @@ public class BankClient implements BankCalculator {
     private List<BankAccount> bankAccounts;
 
     public BankClient(Person person, List<BankAccount> bankAccounts) {
-        this.person = person;
+        if (person == null) {
+            throw new IllegalStateException("A bank client must be a person");
+        }
+        if (bankAccounts.isEmpty() || bankAccounts == null) {
+            throw new IllegalStateException("A client must have at least one bank account");
+        }
         this.bankAccounts = bankAccounts;
+        this.person = person;
     }
 
-    public double getTotalBalance() {
-        // TODO
-        return 0;
+    public double getTotalBalance() throws IllegalStateException {
+        double total = 0;
+        if (this.bankAccounts.size() == 0 || this.bankAccounts == null)
+            throw new IllegalStateException("Method requires one or more bank accounts");
+        for (BankAccount bankAccount : bankAccounts) {
+            total += bankAccount.getBalance();
+        }
+        return total;
     }
 
     public double calculateSeniorityBonus() {

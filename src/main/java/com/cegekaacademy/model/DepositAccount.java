@@ -2,15 +2,17 @@ package com.cegekaacademy.model;
 
 public class DepositAccount extends BankAccount {
 
-    public DepositAccount(String iban, double balance) {
+    private double dobanda;
+
+    public DepositAccount(String iban, double balance, double dobanda) {
         super(iban, balance);
+        this.dobanda = dobanda;
     }
 
     public boolean deposit(double amount) {
         if (amount < 200) {
             return false;
         }
-
         return super.deposit(amount);
     }
 }

@@ -22,7 +22,10 @@ public abstract class BankAccount {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(double balance) throws IllegalStateException {
+        if (balance == 0) {
+            throw new IllegalStateException();
+        }
         this.balance = balance;
     }
 
@@ -45,8 +48,18 @@ public abstract class BankAccount {
     }
 
     public boolean transfer(BankAccount destination, double amount) {
-        // TODO implement me
 
-        return false;
+        if (destination == null) {
+            throw new IllegalStateException("Destination required");
+        }
+
+        if (amount < 1 || amount > this.balance) {
+            throw new IllegalStateException("Incorrect amount");
+        }
+
+        this.balance -= amount;
+        destination.setBalance(destination.getBalance() + amount);
+
+        return true;
     }
 }

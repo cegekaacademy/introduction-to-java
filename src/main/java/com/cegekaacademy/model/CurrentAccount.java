@@ -7,11 +7,11 @@ public class CurrentAccount extends BankAccount {
     }
 
     public boolean withdraw(double amount) {
-        if (amount > 3000) {
-            return false;
-        }
-
-        return super.withdraw(amount);
+        return !(amount > 3000) && super.withdraw(amount);
     }
 
+    @Override
+    public boolean transfer(BankAccount destination, double amount) {
+        return super.transfer(destination, amount);
+    }
 }
