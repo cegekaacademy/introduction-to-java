@@ -29,4 +29,33 @@ public class DepositAccountTest {
         Assert.assertFalse(result);
 
     }
+
+    @Test
+    public void GIVEN_balanceAndInterestAndPeriodOfTimeValid_WHEN_getRate_THEN_returnRate(){
+        DepositAccount depositAccount = new DepositAccount("iban", 1000,0.01,12);
+        double rate = depositAccount.getRate();
+        Assert.assertEquals(10,rate,0.01);
+    }
+
+    @Test
+    public void GIVEN_balanceInvalid_WHEN_getRate_THEN_return0(){
+        DepositAccount depositAccount = new DepositAccount("iban", 0,0.01,12);
+        double rate = depositAccount.getRate();
+        Assert.assertEquals(0,rate,0.01);
+    }
+
+    @Test
+    public void GIVEN_interestInvalid_WHEN_getRate_THEN_return0(){
+        DepositAccount depositAccount = new DepositAccount("iban", 1000,0,12);
+        double rate = depositAccount.getRate();
+        Assert.assertEquals(0,rate,0.01);
+    }
+
+    @Test
+    public void GIVEN_periodOfTimeInvalid_WHEN_getRate_THEN_return0(){
+        DepositAccount depositAccount = new DepositAccount("iban", 0,0.01,0);
+        double rate = depositAccount.getRate();
+        Assert.assertEquals(0,rate,0.01);
+    }
+
 }
