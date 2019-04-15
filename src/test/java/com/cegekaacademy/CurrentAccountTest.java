@@ -45,8 +45,8 @@ public class CurrentAccountTest {
         CurrentAccount currentAccount = new CurrentAccount("iban", 2000D);
         double amount = 3001D;
 
-        DepositAccount depositAccount1 = new DepositAccount("iban2", 1000D,0.07D);
-        boolean result = currentAccount.transfer(depositAccount1,amount);
+        DepositAccount depositAccount = new DepositAccount("iban2", 1000D,0.07D);
+        boolean result = currentAccount.transfer(depositAccount,amount);
         Assert.assertFalse(result);
 
 

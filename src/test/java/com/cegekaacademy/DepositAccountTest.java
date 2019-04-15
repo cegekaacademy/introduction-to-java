@@ -90,4 +90,20 @@ public class DepositAccountTest {
 
 
     }
+    @Test
+    public void GIVEN_emptyDeposit_WHEN_addMonthlyInterest_THEN_returnFalse(){
+        DepositAccount depositAccount = new DepositAccount("iban", 0D, 0.7D);
+        boolean result = depositAccount.addMonthlyInterest();
+
+        Assert.assertFalse(result);
+    }
+    @Test
+    public void GIVEN_validAccount_WHEN_addMonthlyInterest_THEN_returnTrue(){
+        DepositAccount depositAccount = new DepositAccount("iban", 1000D, 0.7D);
+        boolean result = depositAccount.addMonthlyInterest();
+
+        Assert.assertTrue(result);
+        double balance = 1000D+ 1000D*0.7D/12;
+        Assert.assertEquals(balance,depositAccount.getBalance(),0);
+    }
 }

@@ -20,4 +20,12 @@ public class DepositAccount extends BankAccount {
 
         return super.deposit(amount);
     }
+    public boolean addMonthlyInterest(){
+        if (this.getBalance() >0){
+            double newBalance = this.getBalance() + this.getBalance()*interest/12;
+            this.setBalance(newBalance);
+            return true;
+        }
+        return false;
+    }
 }
