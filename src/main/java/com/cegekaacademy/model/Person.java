@@ -10,11 +10,9 @@ public class Person {
     private Address address;
 
     public Person(String name, String pid, Address address) {
-        if (pid == null || pid.length() != 13) {
-            throw new IllegalStateException("Pid should have exactly 13 characters");
-        }
+
         this.name = name;
-        this.pid = pid;
+        setPid(pid);
         this.address = address;
     }
 
@@ -31,6 +29,9 @@ public class Person {
     }
 
     public void setPid(String pid) {
+        if (pid == null || pid.length() != 13) {
+            throw new IllegalStateException("Pid should have exactly 13 characters");
+        }
         this.pid = pid;
     }
 
