@@ -18,7 +18,14 @@ public class BankClient implements BankCalculator {
 
     public double getTotalBalance() {
         // TODO
-        return 0;
+        if (person == null || this.bankAccounts == null || this.bankAccounts.isEmpty()) {
+            throw new IllegalStateException("Client not found");
+        }
+        double totalBalance =0D;
+        for( BankAccount bankAccount : bankAccounts)
+            totalBalance = totalBalance + bankAccount.getBalance();
+
+        return totalBalance;
     }
 
     public double calculateSeniorityBonus() {

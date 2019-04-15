@@ -46,7 +46,20 @@ public abstract class BankAccount {
 
     public boolean transfer(BankAccount destination, double amount) {
         // TODO implement me
+        if(destination == null || this.getIban().equals(destination.getIban())){
+            throw new IllegalStateException("Bank account not found");
+        }
+        if (amount<=0 || amount> this.balance)
+            return false;
+        if (destination instanceof DepositAccount && amount < 200)
+            return false;
+        if (this instanceof CurrentAccount && amount > 3000)
+            return false;
 
-        return false;
+            this.balance = this.balance - amount;
+            destination.deposit(amount);
+            return true;
+
+
     }
 }

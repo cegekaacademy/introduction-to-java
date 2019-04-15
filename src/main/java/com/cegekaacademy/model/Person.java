@@ -13,6 +13,10 @@ public class Person {
         if (pid == null || pid.length() != 13) {
             throw new IllegalStateException("Pid should have exactly 13 characters");
         }
+        int sexId = Integer.valueOf(pid.substring(0, 1));
+        if (sexId == 0 || sexId == 7 || sexId == 8 || sexId ==9){
+            throw new IllegalStateException("Invalid PID");
+        }
         this.name = name;
         this.pid = pid;
         this.address = address;
@@ -50,6 +54,14 @@ public class Person {
 
         if (sexId == 1 || sexId == 2) {
             int yearOfBirth = Integer.valueOf("19" + yearOfBirthDigits);
+            return (int) ChronoUnit.YEARS.between(LocalDate.of(yearOfBirth, monthOfBirth, dayOfBirth), LocalDate.now());
+        }
+        else if (sexId == 3 || sexId == 4) {
+            int yearOfBirth = Integer.valueOf("18" + yearOfBirthDigits);
+            return (int) ChronoUnit.YEARS.between(LocalDate.of(yearOfBirth, monthOfBirth, dayOfBirth), LocalDate.now());
+        }
+        else if (sexId == 5 || sexId == 6) {
+            int yearOfBirth = Integer.valueOf("20" + yearOfBirthDigits);
             return (int) ChronoUnit.YEARS.between(LocalDate.of(yearOfBirth, monthOfBirth, dayOfBirth), LocalDate.now());
         }
 
