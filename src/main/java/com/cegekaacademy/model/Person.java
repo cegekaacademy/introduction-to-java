@@ -46,14 +46,21 @@ public class Person {
         int sexId = Integer.valueOf(this.pid.substring(0, 1));          // 2
         String yearOfBirthDigits = this.pid.substring(1, 3);            // 92
         int monthOfBirth = Integer.valueOf(this.pid.substring(3, 5));   // 01
-        int dayOfBirth = Integer.valueOf(this.pid.substring(5, 7));     // 14
+        int dayOfBirth = Integer.valueOf(this.pid.substring(5, 7));// 14
+        int yearOfBirth;
 
         if (sexId == 1 || sexId == 2) {
-            int yearOfBirth = Integer.valueOf("19" + yearOfBirthDigits);
+             yearOfBirth = Integer.valueOf("19" + yearOfBirthDigits);
             return (int) ChronoUnit.YEARS.between(LocalDate.of(yearOfBirth, monthOfBirth, dayOfBirth), LocalDate.now());
         }
-
-        // TODO implement all the other cases
+        if(sexId == 3 || sexId == 4){
+            yearOfBirth = Integer.valueOf("18" + yearOfBirthDigits);
+            return (int) ChronoUnit.YEARS.between(LocalDate.of(yearOfBirth, monthOfBirth, dayOfBirth), LocalDate.now());
+        }
+        if(sexId == 5 || sexId == 6){
+            yearOfBirth = Integer.valueOf("20" + yearOfBirthDigits);
+            return (int) ChronoUnit.YEARS.between(LocalDate.of(yearOfBirth, monthOfBirth, dayOfBirth), LocalDate.now());
+        }
 
         return 0;
     }
