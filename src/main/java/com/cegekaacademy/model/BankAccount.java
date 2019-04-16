@@ -48,18 +48,9 @@ public abstract class BankAccount {
         if (destination == null)
             throw new IllegalStateException("Invalid destination");
         if (this.balance >= amount) {
-            if (destination instanceof DepositAccount) {
-                if (amount <= 200) {
-                    destination.setBalance(destination.getBalance() + amount);
-                    this.balance -= amount;
-                } else
-                    throw new IllegalStateException("The sum is over the limit of this bank account type!");
-            } else {
-                destination.setBalance(destination.getBalance() + amount);
-                this.balance -= amount;
-            }
-        } else
-            throw new IllegalStateException("Not enough money!");
-        return true;
+            return destination.deposit(amount) && withdraw(amount);
+        } else throw new IllegalStateException("Not enough money!");
     }
+
+
 }

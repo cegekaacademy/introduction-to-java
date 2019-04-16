@@ -14,10 +14,4 @@ public class CurrentAccount extends BankAccount {
 
         return super.withdraw(amount);
     }
-
-    public boolean transfer(BankAccount destination, double amount) {
-        if (amount > 3000 || amount < 0) {
-            throw new IllegalStateException("The sum is over the limit of this bank account type!");
-        } else return super.transfer(destination, amount);
-    }
 }
