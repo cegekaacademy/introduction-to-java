@@ -45,7 +45,9 @@ public abstract class BankAccount {
     }
 
     public boolean transfer(BankAccount destination, double amount) {
-        // TODO implement me
+        if (destination.withdraw(amount)){
+            return true;
+        }
 
         return false;
     }

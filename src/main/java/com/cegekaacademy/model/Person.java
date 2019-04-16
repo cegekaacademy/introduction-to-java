@@ -2,6 +2,7 @@ package com.cegekaacademy.model;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 
 public class Person {
 
@@ -47,13 +48,18 @@ public class Person {
         String yearOfBirthDigits = this.pid.substring(1, 3);            // 92
         int monthOfBirth = Integer.valueOf(this.pid.substring(3, 5));   // 01
         int dayOfBirth = Integer.valueOf(this.pid.substring(5, 7));     // 14
+        String currentYear = Integer.toString(Calendar.getInstance().get(Calendar.YEAR));
+        int yearOfBirth;
 
-        if (sexId == 1 || sexId == 2) {
-            int yearOfBirth = Integer.valueOf("19" + yearOfBirthDigits);
-            return (int) ChronoUnit.YEARS.between(LocalDate.of(yearOfBirth, monthOfBirth, dayOfBirth), LocalDate.now());
+        if((sexId == 1 || sexId == 2) || (sexId >= 5 && sexId <= 8)){
+            if(Integer.valueOf(yearOfBirthDigits) >= Integer.valueOf(currentYear.substring(2,3))){
+                yearOfBirth = Integer.valueOf("19" + yearOfBirthDigits);
+                return (int) ChronoUnit.YEARS.between(LocalDate.of(yearOfBirth, monthOfBirth, dayOfBirth), LocalDate.now());
+            } else {
+                yearOfBirth = Integer.valueOf("20" + yearOfBirthDigits);;
+                return (int) ChronoUnit.YEARS.between(LocalDate.of(yearOfBirth, monthOfBirth, dayOfBirth), LocalDate.now());
+            }
         }
-
-        // TODO implement all the other cases
 
         return 0;
     }
