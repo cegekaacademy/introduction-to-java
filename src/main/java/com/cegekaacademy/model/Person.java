@@ -1,5 +1,9 @@
 package com.cegekaacademy.model;
 
+import jdk.internal.cmm.SystemResourcePressureImpl;
+
+import java.util.Calendar;
+
 public class Person {
 
     private String name;
@@ -40,8 +44,46 @@ public class Person {
     }
 
     public int calculateAge() {
-        // TODO implement me
 
-        return 0;
+        int age = 0;
+        int yearOfBirth = Integer.parseInt(this.pid.substring(1, 3));
+        int monthOfBirth = Integer.parseInt(this.pid.substring(3,5));
+        switch (Character.getNumericValue(this.pid.charAt(0))){
+            case 1:
+                System.out.println("Persoana este nascuta intre 1 ianuarie 1900 și 31 decembrie 1999");
+                age = Calendar.getInstance().get(Calendar.YEAR) - (1900 + yearOfBirth);
+                break;
+            case 2:
+                System.out.println("Persoana este nascuta intre 1 ianuarie 1900 și 31 decembrie 1999");
+                age = Calendar.getInstance().get(Calendar.YEAR) - (1900 + yearOfBirth);
+                break;
+            case 3:
+                System.out.println("Persoana este nascuta intre 1 ianuarie 1800 și 31 decembrie 1899");
+                age = Calendar.getInstance().get(Calendar.YEAR) - (1800 + yearOfBirth);
+                break;
+            case 4:
+                System.out.println("Persoana este nascuta intre 1 ianuarie 1800 și 31 decembrie 1899");
+                age = Calendar.getInstance().get(Calendar.YEAR) - (1800 + yearOfBirth);
+                break;
+            case 5:
+                System.out.println("Persoana este nascuta intre 1 ianuarie 2000 și 31 decembrie 2099");
+                age = Calendar.getInstance().get(Calendar.YEAR) - (2000 + yearOfBirth);
+                break;
+            case 6:
+                System.out.println("Persoana este nascuta intre 1 ianuarie 2000 și 31 decembrie 2099");
+                age = Calendar.getInstance().get(Calendar.YEAR) - (2000 + yearOfBirth);
+                break;
+        }
+
+        if(age == 0) {
+            System.out.println("S-a produce o erore in sistem");
+            return 0;
+        }
+
+        if (monthOfBirth > Calendar.getInstance().get(Calendar.MONTH)){
+            age--;
+        }
+
+        return age;
     }
 }

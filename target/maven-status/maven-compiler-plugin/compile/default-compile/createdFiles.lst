@@ -1,0 +1,8 @@
+com\cegekaacademy\bank\BankClient.class
+com\cegekaacademy\model\Person.class
+com\cegekaacademy\Main.class
+com\cegekaacademy\model\Address.class
+com\cegekaacademy\model\DepositAccount.class
+com\cegekaacademy\model\BankAccount.class
+com\cegekaacademy\model\CurrentAccount.class
+com\cegekaacademy\bank\BankCalculator.class

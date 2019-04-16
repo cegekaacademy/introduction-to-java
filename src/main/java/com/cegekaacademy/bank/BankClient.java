@@ -18,8 +18,11 @@ public class BankClient implements BankCalculator {
 
     @Override
     public double getTotalBalance() {
-        // TODO implement me
-        return 0;
+        double totalBalance = 0;
+        for (BankAccount bankAccount : bankAccounts) {
+            totalBalance += bankAccount.getBalance();
+        }
+        return totalBalance;
     }
 
     @Override
@@ -44,4 +47,24 @@ public class BankClient implements BankCalculator {
         return bonus;
     }
 
+    public double calculateYoungBonus() {
+        if (person == null || this.bankAccounts == null || this.bankAccounts.isEmpty()) {
+            throw new IllegalStateException("Client not found");
+        }
+
+        if ((person.calculateAge() < 18) || (person.calculateAge() > 25)) {
+            return 0;
+        }
+
+        int bonus = 0;
+        for (BankAccount bankAccount : bankAccounts) {
+            if (bankAccount instanceof DepositAccount) {
+                bonus += 0.03 * bankAccount.getBalance();
+            } else {
+                bonus += 0.01 * bankAccount.getBalance();
+            }
+        }
+
+        return bonus;
+    }
 }
