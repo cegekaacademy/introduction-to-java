@@ -2,7 +2,9 @@ package com.cegekaacademy.model;
 
 public class DepositAccount extends BankAccount {
 
-    //TODO add interest
+    public void addInterest(int numberOfMonths) {
+        setBalance(getBalance() * 0.2 * numberOfMonths);
+    }
 
     public DepositAccount(String iban, double balance) {
         super(iban, balance);
