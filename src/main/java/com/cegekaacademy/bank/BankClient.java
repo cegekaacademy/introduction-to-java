@@ -18,6 +18,9 @@ public class BankClient implements BankCalculator {
 
     @Override
     public double getTotalBalance() {
+        if (person == null || this.bankAccounts == null || this.bankAccounts.isEmpty()) {
+            throw new IllegalStateException("Client not found");
+        }
         double totalBalance = 0F;
         for (BankAccount bankAccount : bankAccounts)
             totalBalance += bankAccount.getBalance();
