@@ -20,9 +20,9 @@ public class BankClient implements BankCalculator {
         // TODO
 
         double totalBalance = 0.0D;
-        for(BankAccount balance : bankAccounts)
+        for(BankAccount account : bankAccounts)
         {
-            totalBalance += balance.getBalance();
+            totalBalance += account.getBalance();
         }
 
         return totalBalance;

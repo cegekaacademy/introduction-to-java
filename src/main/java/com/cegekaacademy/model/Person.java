@@ -59,6 +59,44 @@ public class Person {
             yearOfBirth = Integer.valueOf("20" + yearOfBirthDigits);
         }
 
+        if(yearOfBirth == 0)
+        {
+            return 0;
+        }
+        if(monthOfBirth < 1 || monthOfBirth > 12)
+            return -1;
+
+
+        if(yearOfBirth % 4 == 0) // leap year
+        {
+            if(monthOfBirth == 2 ){
+                if(dayOfBirth > 29)
+                    return -2;
+            }
+
+        }
+        else
+        {
+            if(monthOfBirth == 2)
+                if(dayOfBirth > 28)
+                    return -2;
+        }
+
+        if(monthOfBirth == 1 || monthOfBirth == 3 || monthOfBirth == 5 || monthOfBirth == 7
+             || monthOfBirth == 8 || monthOfBirth == 10 || monthOfBirth == 12)
+        {
+            if(dayOfBirth > 31)
+                return -3;
+        }
+
+
+        if(monthOfBirth == 4 || monthOfBirth == 6 || monthOfBirth == 9 || monthOfBirth == 11)
+        {
+            if(dayOfBirth > 30)
+                return -3;
+        }
+
+
         // TODO implement all the other cases
 
         return (int) ChronoUnit.YEARS.between(LocalDate.of(yearOfBirth, monthOfBirth, dayOfBirth), LocalDate.now());
