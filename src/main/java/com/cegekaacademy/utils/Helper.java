@@ -2,6 +2,9 @@ package com.cegekaacademy.utils;
 
 public class Helper {
     public static boolean validatePid(String pid) {
+        if (pid == null || pid.length() != 13) {
+            throw new IllegalStateException("Pid should have exactly 13 characters");
+        }
         String key = "279146358279";
         int sum = 0;
         for (int i = 0; i < 12; i++)
