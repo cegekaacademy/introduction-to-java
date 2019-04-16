@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-public class CurrentAccountTest {
+public class BankAccountTest {
 
     @Test
     public void testCurrentAccount() {
@@ -19,22 +19,24 @@ public class CurrentAccountTest {
     }
 
     @Test
-    public void GIVEN_depositAccountDestinationAndAmountSmallerThanLimit_WHEN_transfer_THEN_returnTrue() {
+    public void GIVEN_depositAccountValidDestinationAndAmountBiggerOrEqualThanLimit_WHEN_transfer_THEN_returnTrue() {
         CurrentAccount currentAccount = new CurrentAccount("iban", 1000D);
-        DepositAccount depositAccount = Mockito.mock(DepositAccount.class);
-        Mockito.when(depositAccount.getBalance()).thenReturn(1D);
+        DepositAccount destinationAccount = new DepositAccount("iban", 1);
         double amount = 200;
-        Assert.assertTrue(currentAccount.transfer(depositAccount, amount));
-        Mockito.verify(depositAccount, Mockito.times(1)).getBalance();
+        Assert.assertTrue(currentAccount.transfer(destinationAccount, amount));
+        Assert.assertEquals(800D, currentAccount.getBalance(), 0);
+        Assert.assertEquals(201D, destinationAccount.getBalance(), 0);
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void GIVEN_depositAccountDestinationAndAmountGreaterThanLimit_WHEN_transfer_THEN_throwException() {
+    @Test
+    public void GIVEN_depositAccountDestinationAndAmountSmallerThanLimit_WHEN_transfer_THEN_returnFalse() {
         CurrentAccount currentAccount = new CurrentAccount("iban", 1000D);
         DepositAccount depositAccount = Mockito.mock(DepositAccount.class);
         Mockito.when(depositAccount.getBalance()).thenReturn(1D);
-        double amount = 205;
-        currentAccount.transfer(depositAccount, amount);
+        double amount = 190;
+        Assert.assertFalse(currentAccount.transfer(depositAccount, amount));
+        Assert.assertEquals(1000D, currentAccount.getBalance(), 0);
+        Assert.assertEquals(1D, depositAccount.getBalance(), 0);
         Mockito.verify(depositAccount, Mockito.times(1)).getBalance();
     }
 
@@ -45,6 +47,8 @@ public class CurrentAccountTest {
         Mockito.when(depositAccount.getBalance()).thenReturn(1D);
         double amount = 200;
         currentAccount.transfer(depositAccount, amount);
+        Assert.assertEquals(195, currentAccount.getBalance(), 0);
+        Assert.assertEquals(1D, depositAccount.getBalance(), 0);
         Mockito.verify(depositAccount, Mockito.times(1)).getBalance();
     }
 
@@ -61,17 +65,20 @@ public class CurrentAccountTest {
         Mockito.when(destinationAccount.getBalance()).thenReturn(1D);
         double amount = 210;
         currentAccount.transfer(destinationAccount, amount);
+        Assert.assertEquals(195D, currentAccount.getBalance(), 0);
+        Assert.assertEquals(1D, destinationAccount.getBalance(), 0);
         Mockito.verify(destinationAccount, Mockito.times(1)).getBalance();
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void GIVEN_currentAccountDestinationAndAmoutGreaterThanLimit_WHEN_trasnfer_THEN_throwException() {
+    @Test
+    public void GIVEN_currentAccountDestinationAndAmountGreaterThanLimit_WHEN_transfer_THEN_returnFalse() {
         CurrentAccount currentAccount = new CurrentAccount("iban", 3195);
         CurrentAccount destinationAccount = Mockito.mock(CurrentAccount.class);
         Mockito.when(destinationAccount.getBalance()).thenReturn(1D);
         double amount = 3005;
-        currentAccount.transfer(destinationAccount, amount);
-        Mockito.verify(destinationAccount, Mockito.times(1)).getBalance();
+        Assert.assertFalse(currentAccount.transfer(destinationAccount, amount));
+        Assert.assertEquals(3195D, currentAccount.getBalance(), 0);
+        Assert.assertEquals(1D, destinationAccount.getBalance(), 0);
     }
 
 }
