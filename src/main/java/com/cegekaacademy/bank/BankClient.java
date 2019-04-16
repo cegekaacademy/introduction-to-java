@@ -18,7 +18,14 @@ public class BankClient implements BankCalculator {
 
     public double getTotalBalance() {
         // TODO
-        return 0;
+
+        double totalBalance = 0.0D;
+        for(BankAccount balance : bankAccounts)
+        {
+            totalBalance += balance.getBalance();
+        }
+
+        return totalBalance;
     }
 
     public double calculateSeniorityBonus() {

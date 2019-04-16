@@ -47,6 +47,16 @@ public abstract class BankAccount {
     public boolean transfer(BankAccount destination, double amount) {
         // TODO implement me
 
+        double currentBalance = this.getBalance();
+
+        if(currentBalance >= amount)
+        {
+            destination.setBalance(destination.getBalance() + amount);
+            this.setBalance(this.getBalance() - amount);
+
+            return true;
+        }
+
         return false;
     }
 }
